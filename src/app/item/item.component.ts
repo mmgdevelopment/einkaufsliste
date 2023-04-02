@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Item, Status } from 'src/model/item'
+import { DatabaseService } from '../database.service'
 
 @Component({
   selector: 'app-item',
@@ -11,6 +12,11 @@ export class ItemComponent implements OnInit {
   @Input() title: string | undefined
   @Input() status: Status | undefined
   item!: Item
+  _databaseService
+
+  constructor(databaseService: DatabaseService) {
+    this._databaseService = databaseService
+  }
 
   ngOnInit(): void {
     if (this.id && this.title && this.status) {
@@ -27,6 +33,14 @@ export class ItemComponent implements OnInit {
         status: 'needed',
       }
       console.log('item could not be created')
+    }
+  }
+
+  changeStatus(id: string, status: Status) {
+    if (status === 'needed') {
+      this._databaseService.updateItem(id, 'completed')
+    } else if (status === 'completed') {
+      this._databaseService.updateItem(id, 'needed')
     }
   }
 }

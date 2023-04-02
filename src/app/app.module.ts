@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app'
+import { getFirestore, provideFirestore } from '@angular/fire/firestore'
+import { FormsModule } from '@angular/forms'
+import { environment } from '../environments/environment'
 import { AppComponent } from './app.component'
 import { ItemComponent } from './item/item.component'
-import { ItemsCompletedComponent } from './items-completed/items-completed.component'
-import { ItemsNeededComponent } from './items-needed/items-needed.component'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ItemsNeededComponent,
-    ItemsCompletedComponent,
-    ItemComponent,
+  declarations: [AppComponent, ItemComponent],
+  imports: [
+    BrowserModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    FormsModule,
   ],
-  imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
 })

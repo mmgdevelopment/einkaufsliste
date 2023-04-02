@@ -1,4 +1,6 @@
-;<div>
-  <span>{{ item.title }}</span>
-  <span>{{ item.id }}</span>
+<div (click)="changeStatus(item.id, item.status)"
+[class.needed]="item.status === 'needed'"
+[class.completed]="item.status === 'completed'"
+>
+ {{item.title }}
 </div>

@@ -1,2 +1,25 @@
-<app-items-needed></app-items-needed>
-<app-items-completed></app-items-completed>
+
+<h1>Einkaufsliste</h1>
+
+<div class="itemContainer">
+    <app-item
+    *ngFor="let item of neededItems$ | async"
+    [id]="item.id"
+    [title]="item.title"
+    [status]="item.status">
+    </app-item>
+</div>
+
+<form class="input">
+    <input type="text" name="addItem" [(ngModel)]="newItemtitle">
+    <button (click)="addItem()">+</button>
+</form>
+
+<div class="itemContainer">
+    <app-item
+    *ngFor="let item of completedItems$ | async"
+    [id]="item.id"
+    [title]="item.title"
+    [status]="item.status">
+    </app-item>
+</div>
