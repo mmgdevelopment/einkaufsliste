@@ -12,9 +12,12 @@
     </app-item>
 </div>
 
-<form class="input" (submit)="addItem()">
+<form class="input" >
     <input placeholder="Artikel hinzufügen" type="text" name="addItem" [(ngModel)]="newItemtitle">
-    <img src="./../assets/add.svg" alt="">
+    <button (click)="addItem()">
+        <img src="./../assets/add.svg" alt="">
+    </button>
+
 </form>
 
 <span>Zuletzt verwendet</span>
