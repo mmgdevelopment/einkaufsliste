@@ -1,6 +1,6 @@
-<div (click)="changeStatus(item.id, item.status)"
-[class.needed]="item.status === 'needed'"
-[class.completed]="item.status === 'completed'"
+<div (click)="changeStatus(id, status)"
+[class.needed]="status === 'needed'"
+[class.completed]="status === 'completed'"
 >
- {{item.title }}
+ {{title }}
 </div>

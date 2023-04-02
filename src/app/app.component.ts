@@ -9,18 +9,15 @@ import { DatabaseService } from './database.service'
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent implements OnInit {
-  _databaseService
-  allItems$: Observable<Item[]>
-  neededItems$: Observable<Item[]> | undefined
-  completedItems$: Observable<Item[]> | undefined
-  newItemtitle: string = ''
+  private allItems$: Observable<Item[]> | undefined
+  public neededItems$: Observable<Item[]> | undefined
+  public completedItems$: Observable<Item[]> | undefined
+  public newItemtitle: string = ''
 
-  constructor(databaseService: DatabaseService) {
-    this._databaseService = databaseService
-    this.allItems$ = this._databaseService.getAllItems()
-  }
+  constructor(private databaseService: DatabaseService) {}
 
   ngOnInit(): void {
+    this.allItems$ = this.databaseService.getAllItems()
     this.neededItems$ = this.allItems$.pipe(
       map((item) => item.filter((item) => item.status === 'needed'))
     )
@@ -31,7 +28,7 @@ export class AppComponent implements OnInit {
 
   addItem() {
     if (this.newItemtitle.length > 1) {
-      this._databaseService.createItem({
+      this.databaseService.createItem({
         title: this.newItemtitle,
         status: 'needed',
         id: '',
